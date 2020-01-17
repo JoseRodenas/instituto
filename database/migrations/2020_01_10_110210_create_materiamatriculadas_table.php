@@ -4,20 +4,19 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMateriamatriculadasTable extends Migration
-{
+class CreateMateriamatriculadasTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+
+    public function up() {
         Schema::create('materiamatriculada', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('alumno')->unsigned()->nullable();
-            $table->integer('materia')->nullable();
-            $table->integer('grupo')->nullable();
+            $table->bigInteger('alumno')->unsigned();
+            $table->bigInteger('materia')->unsigned();
+            $table->bigInteger('grupo')->unsigned();
             $table->timestamps();
         });
     }
@@ -27,8 +26,9 @@ class CreateMateriamatriculadasTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        Schema::dropIfExists('materiamatriculada');
+    public function down() {
+        $table->dropForeign('alumno');
+        $table->dropForeign('materia');
+        $table->dropForeign('grupo');
     }
 }
