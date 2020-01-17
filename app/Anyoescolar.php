@@ -12,4 +12,20 @@ class Anyoescolar extends Model
      * @var string
      */
     protected $table = 'anyosescolares';
+
+    /**
+     * Get the centro that owns the año escolar.
+     */
+    public function centroObject()
+    {
+        return $this->belongsTo('App\Centro', 'centro');
+    }
+
+    /**
+     * Get the grupos for the años escolares.
+     */
+    public function grupos()
+    {
+        return $this->hasMany('App\Grupo', 'anyoescolar');
+    }
 }

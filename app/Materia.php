@@ -4,17 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Materia extends Model
-{
+class Materia extends Model {
     protected $table = "materia";
 
-    public function MateriaImpartida ()
-    {
-        return $this->hasMany('App\MateriaImpartida', 'materia');
+    public function materiasImpartidas() {
+        return $this->hasMany('App\Materiaimpartida', "materia");
     }
-
-    public function MateriaMatriculada ()
-    {
-        return $this->hasMany('App\MateriaMatriculada', 'materia');
+    public function materiasMatriculadas() {
+        return $this->hasMany('App\Materiamatriculada', "materia");
     }
 }

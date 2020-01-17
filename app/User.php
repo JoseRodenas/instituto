@@ -43,18 +43,56 @@ class User extends Authenticatable
      */
     public function centros()
     {
-        return $this->hasMany('App\Centro', 'coordinador');
+        return $this->hasOne('App\Centro', 'coordinador');
     }
 
+    /**
+     * Get the grupos for the user as tutor.
+     */
+    public function tutorGrupos()
+    {
+        return $this->hasMany('App\Grupo', 'tutor');
+    }
+
+    /**
+     * Get the grupos for the user as creador.
+     */
+    public function creadorGrupos()
+    {
+        return $this->hasMany('App\Grupo', 'creador');
+    }
+
+    /**
+     * Get the materiasimpartidas for the user as docente.
+     */
+    public function materiasimpartidas()
+    {
+        return $this->hasMany('App\Materiasimpartidas', 'docente');
+    }
+
+    /**
+     * Get the materiasmatriculadas for the user as alumno.
+     */
+    public function materiasmatriculadas()
+    {
+        return $this->hasMany('App\Materiasmatriculadas', 'alumno');
+    }
+
+    /**
+     * Get the matriculas for the user as alumno.
+     */
     public function matriculas() {
         return $this->hasMany('App\Matricula', 'alumno');
     }
 
-    public function tutorado() {
+    /**
+     * Get the tutorados for the user as tutorado.
+     */
+    public function tutorados() {
         return $this->hasMany('App\Tutorizado', 'tutorado');
     }
 
-    public function tutor() {
-        return $this->hasOne('App\Tutorizado', 'tutor');
+    public function tutores() {
+        return $this->hasMany('App\Tutorizado', 'tutor');
     }
 }
