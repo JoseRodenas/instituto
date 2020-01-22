@@ -16,7 +16,7 @@ class MateriamatriculadaTableSeeder extends Seeder
 
 
         if (env('APP_ENV') != 'production') {
-            DB::table('materiamatriculada')->truncate();
+            DB::table('materiasmatriculadas')->truncate();
             $materiamatriculada = factory(App\Materiamatriculada::class, 100)->create();
         }
     }

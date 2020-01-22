@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMatriculasTable extends Migration
+class AddForeignToAnyosescolaresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateMatriculasTable extends Migration
      */
     public function up()
     {
-        Schema::create('matriculas', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('alumno')->unsigned();
-            $table->bigInteger('grupo')->unsigned();
-            $table->timestamps();
+        Schema::table('anyosescolares', function (Blueprint $table) {
+            $table->foreign('centro')->references('id')->on('centros')->onDelete('cascade');
         });
     }
 
@@ -28,6 +25,8 @@ class CreateMatriculasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('matriculas');
+        Schema::table('anyosescolares', function (Blueprint $table) {
+            $table->dropForeign('anyosescolares_centro_foreign');
+        });
     }
 }

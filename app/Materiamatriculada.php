@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 class Materiamatriculada extends Model {
-    protected $table = "materiamatriculada";
+    protected $table = "materiasmatriculadas";
 
     public function userObject() {
         return $this->belongsTo('\App\User', 'alumno');

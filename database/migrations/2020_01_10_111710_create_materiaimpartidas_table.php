@@ -15,9 +15,9 @@ class CreateMateriaimpartidasTable extends Migration
     {
         Schema::create('materiasimpartidas', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('docente');
-            $table->integer('grupo');
-            $table->integer('materia');
+            $table->bigInteger('docente')->unsigned();
+            $table->bigInteger('grupo')->unsigned();
+            $table->bigInteger('materia')->unsigned();
             $table->timestamps();
         });
     }

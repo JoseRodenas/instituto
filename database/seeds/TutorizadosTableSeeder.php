@@ -16,7 +16,7 @@ class TutorizadosTableSeeder extends Seeder
 
             $users = factory(App\User::class, 50)->create()
                 ->each(function ($user) {
-                $user->tutor()->save(factory(App\Tutorizado::class)->make());
+                $user->tutores()->save(factory(App\Tutorizado::class)->make());
             });
         }
     }
