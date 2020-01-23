@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Anyoescolar extends Model
 {
+    protected $fillable = ['fechainicio', 'fechafinal', 'centro'];
     /**
      * The table associated with the model.
      *

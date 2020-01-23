@@ -10,6 +10,6 @@ $factory->define(Matricula::class, function (Faker $faker) {
         /* alumno se generará desde el seeder de Usuarios
         'alumno' => $faker->randomNumber,
         */
-        'grupo' => $faker->randomNumber,
+        'grupo' => $faker->numberBetween($min = 1, $max = 20),
     ];
 });

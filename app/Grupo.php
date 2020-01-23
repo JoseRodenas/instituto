@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Grupo extends Model
 {
+    protected $fillable = ['curso','letra','nombre','tutor','anyoescolar','nivel','verificado','creador'];
     /**
      * Get the post that owns the comment.
      */

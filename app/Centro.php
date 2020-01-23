@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Centro extends Model
 {
+    protected $fillable = ['codigo', 'nombre', 'web', 'situacion', 'coordinador'];
     /**
      * Get the anyosescolares for the centro.
      */

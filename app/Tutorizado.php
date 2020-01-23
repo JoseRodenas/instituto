@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tutorizado extends Model
 {
+
+    protected $fillable = ['tutorado','tutor'];
+
     public function tutorObject() {
         return $this->belongsTo('App\User', 'tutor');
     }
