@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 class LoginController extends Controller
 {
     /*
@@ -37,4 +41,33 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    /**
+     *
+     * login api *
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function login(Request $request)
+    {
+        $request->validate([
+            'email' => 'required|string|email',
+            'password' => 'required|string',
+        ]);
+        $credentials = request(['email', 'password']);
+        if (!Auth::attempt($credentials)) {
+            return response()->json([
+                'message' => 'Unauthorized'], 401);
+        }
+        $user = Auth::user();
+        $tokenResult = $user->createToken('Instituto Personal Access Client');
+        return response()->json([
+            'access_token' => $tokenResult->accessToken,
+            'token_type' => 'Bearer',
+            'expires_at' => $tokenResult->token->expires_at,
+        ]);
+
+    }
+
 }

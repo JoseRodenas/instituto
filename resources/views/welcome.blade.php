@@ -1,27 +1,3 @@
-<<<<<<< HEAD
-@extends('layouts.app')
-@section('content')
-            <div class="content">
-
-                <div id="dataJQuery">
-                </div>
-                <div class="title m-b-md">
-
-                    Laravel
-                </div>
-                <div class="links">
-                    <button id="loadUsers">Users</button>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-@endsection
-=======
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -122,4 +98,3 @@
 </div>
 </body>
 </html>
->>>>>>> 6d812decd20b97b9edaf58dc72d6e769b6894472
