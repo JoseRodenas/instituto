@@ -27,12 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         Passport::routes();
-<<<<<<< HEAD
-
-        Passport::personalAccessClient();
-=======
         //
         Passport::personalAccessClientId(1);
->>>>>>> 5cb2d6dddf98b52c0d431dcc0d2d70da2996d98a
     }
 }
