@@ -95,4 +95,33 @@ class User extends Authenticatable
     public function tutores() {
         return $this->hasMany('App\Tutorizado', 'tutor');
     }
+
+    public function isSuperAdmin() {
+        return $this->email === config('app.superadmin_email');
+    }
+    
+    public function isCoordinadorCentro(Centro $centro = null)
+    {
+        return true;
+    }
+
+    public function isProfesorCentro(Centro $centro = null)
+    {
+        return true;
+    }
+
+    public function isAlumnoCentro(Centro $centro = null)
+    {
+        return true;
+    }
+
+    public function isCreadorGrupo(Grupo $grupo = null)
+    {
+        return true;
+    }
+
+    public function isTutorGrupo(Grupo $grupo = null)
+    {
+        return true;
+    }
 }

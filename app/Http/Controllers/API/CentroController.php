@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CentroController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Centro::class, 'centro');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -29,17 +34,6 @@ class CentroController extends Controller
     public function store(Request $request)
     {
         $centro = Centro::create(json_decode($request->getContent(), true));
-        /* Con URLEncoded Form data
-         *         $centro = Centro::create([
-                    'codigo' => $inputJson->codigo,
-                    'nombre' => $inputJson->nombre,
-                    'web' => $inputJson->web,
-                    // TODO manage geometry points
-                    'situacion' => $inputJson->situacion,
-                    // TODO manage coordinador
-                    'coordinador' => Auth::id(),
-                ]);
-        */
 
         return new CentroResource($centro);
     }
@@ -64,16 +58,10 @@ class CentroController extends Controller
      */
     public function update(Request $request, Centro $centro)
     {
+        // Utilizando autorización en los métodos del controlador
+        // $this->authorize('update', $centro);
         $centro->update(json_decode($request->getContent(), true));
         return new CentroResource($centro);
-        /* Con URLEncoded Form data
-                $centro->setAttribute('codigo', $inputJson->codigo);
-                $centro->setAttribute('nombre', $inputJson->nombre);
-                $centro->setAttribute('web', $inputJson->web);
-                $centro->setAttribute('situacion', $inputJson->situacion);
-
-                $centro->save();
-        */
     }
 
     /**

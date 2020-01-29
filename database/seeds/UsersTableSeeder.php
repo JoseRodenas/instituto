@@ -19,7 +19,15 @@ class UsersTableSeeder extends Seeder
 
         if(env('APP_ENV') != 'production') {
             DB::table('users')->truncate();
-
+            // Create SuperAdmin account
+            $superAdmin = \App\User::create([
+                'email' => config('app.superadmin_email'),
+                'email_verified_at' => now(),
+                'password' => bcrypt(config('app.superadmin_password')),
+                'name' => explode('@', config('app.superadmin_email'))[0],
+                'first_name' => config('app.superadmin_first_name'),
+                'last_name' => config('app.superadmin_last_name'),
+            ]);
             DB::table('centros')->truncate();
             // Create 3 App\User instances...
             $users = factory(App\User::class, 3)->create()
