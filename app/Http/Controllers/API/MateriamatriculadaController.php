@@ -17,7 +17,7 @@ class MateriamatriculadaController extends Controller
 
     public function __construct()
     {
-        $this->authorizeResource(Materiamatriculada::class, 'Materiamatriculada');
+        $this->authorizeResource(Materiamatriculada::class, 'materiamatriculada');
     }
 
 
@@ -38,6 +38,7 @@ class MateriamatriculadaController extends Controller
 
 
         return new MateriamatriculadaResource($materiamatriculada);
+
     }
 
     /**
