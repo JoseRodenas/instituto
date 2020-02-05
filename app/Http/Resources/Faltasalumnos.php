@@ -16,11 +16,11 @@ class Faltasalumnos extends JsonResource
     {
         return [
          "idfaltasalumno" => $this->idfaltasalumno,
-         "alumno" => $this->alumno,
+         "alumno" => $this->userObject,
          "asiste" => $this->asiste,
          "retraso" => $this->retraso,
          "justificada" =>$this->justificada,
-         "periodoclase_id" =>$this->periodioclase_id
+         "periodoclase_id" =>$this->periodoClaseObject
         ];
     }
 }

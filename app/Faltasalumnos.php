@@ -10,7 +10,11 @@ protected $table = "faltasalumnos";
 
 protected $fillabe = ["idfaltasalumno", "alumno", "asiste", "retraso", "justificada", "periodoclase_id"];
 
-//terminar las relaciones
-//modificar los resources con los objects
-//
+public function userObject() {
+    return $this->belongsTo('\App\User', 'alumno');
+}
+
+public function periodoClaseObject() {
+    return $this->belongsTo('\App\Periodoclases', 'periodoclase_id');
+}
 }
