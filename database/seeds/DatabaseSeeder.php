@@ -1,5 +1,6 @@
 <?php
 
+use App\Faltasalumnos;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,6 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(GruposTableSeeder::class);
         $this->call(MateriasimpartidasTableSeeder::class);
         $this->call(NivelesTableSeeder::class);
+        $this->call(FaltasalumnosTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }
