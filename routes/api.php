@@ -28,6 +28,8 @@ Route::middleware('auth:api')->group(function () {
     ]);
     Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
+    Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
+
     Route::apiResource('tutorizados', 'API\TutorizadoController');
 
     Route::apiResource('centros', 'API\CentroController')->parameters([
