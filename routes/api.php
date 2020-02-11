@@ -62,7 +62,7 @@ Route::middleware('auth:api')->group(function () {
         'materiasimpartidas' => 'materiaimpartida'
     ]);
 
-    Route::apiResource('periodosclases', 'PeriodoclaseController');
+    Route::apiResource('periodosclases', 'API\PeriodoclaseController');
 
 });
 

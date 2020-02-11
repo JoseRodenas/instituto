@@ -24,18 +24,21 @@ class Periodoclase extends Model
     }
 
     public function dameAlumnosMatriculados(){
-        DB::enableQueryLog();
         $alumnos = DB::table('periodosclases')
-            ->join('materiaimpartida', 'periodosclases.materiaimpartida_id', '=', 'materiaimpartida.id')
-            ->join('grupo', 'materiaimpartida.grupo', '=', 'grupo.id')
-            ->join('matricula', 'grupo.id', '=', 'matricula.grupo')
-            ->join('users', 'matricula.alumno', '=', 'users.id')
+            ->join('materiasimpartidas', 'periodosclases.materiaimpartida_id', '=', 'materiasimpartidas.id')
+            ->join('grupos', 'materiasimpartidas.grupo', '=', 'grupos.id')
+            ->join('matriculas', 'grupos.id', '=', 'matriculas.grupo')
+            ->join('users', 'matriculas.alumno', '=', 'users.id')
             ->get();
-        dd(DB::getQueryLog());
+            
+            $coleccion = $alumnos->map(function ($item, $key) {
+                return $item->alumno;
+            });
+            
+            $users = DB::table('users')
+                    ->whereIn('id', $coleccion)
+                    ->get();
+            
+            return $users;
     }
-    /* Crea, en el modelo App/Periodoclase, el método $periodoclase->alumnos(), 
-    que devuelva los alumnos que deben estar presentes en ese peridoclase por estar matriculado 
-    en el grupo relacionado. */
-    
-    
 }

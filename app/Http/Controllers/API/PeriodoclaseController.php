@@ -5,6 +5,7 @@ namespace App\Http\Controllers\API;
 use App\Http\Controllers\Controller;
 use App\Periodoclase;
 use Illuminate\Http\Request;
+use App\Http\Resources\PeriodoclaseResource;
 
 class PeriodoclaseController extends Controller
 {
@@ -14,7 +15,10 @@ class PeriodoclaseController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        /*
+        $periodoclase = Periodoclase::find(1)->first();
+        return $periodoclase->dameAlumnosMatriculados();*/
         return PeriodoclaseResource::collection(Periodoclase::paginate());
     }
 
@@ -27,7 +31,7 @@ class PeriodoclaseController extends Controller
     public function store(Request $request)
     {
         $periodoclase = json_decode($request->getContent(), true);
-        $periodoclase = Tutorizado::create($periodoclase);
+        $periodoclase = Periodoclase::create($periodoclase);
         return new PeriodoclaseResource($periodoclase);
     }
 
@@ -39,6 +43,7 @@ class PeriodoclaseController extends Controller
      */
     public function show(Periodoclase $periodoclase)
     {
+        //return $periodoclase->dameAlumnosMatriculados();
         return new PeriodoclaseResource($periodoclase);
     }
 
