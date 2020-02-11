@@ -22,6 +22,9 @@ class DatabaseSeeder extends Seeder
         $this->call(MateriasimpartidasTableSeeder::class);
         $this->call(NivelesTableSeeder::class);
         $this->call(FaltasalumnosTableSeeder::class);
+        $this->call(AulasTableSeeder::class);
+        $this->call(PeriodoslectivosTableSeeder::class);
+        $this->call(PeriodoclaseTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }

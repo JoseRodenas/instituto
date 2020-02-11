@@ -45,7 +45,7 @@ class MatriculaPolicy
         $user = Auth::user();
         $grupo = $matricula->grupoObject;
         return ( $user->isCoordinadorCentro($centro) || $user->isCreadorGrupo($grupo) || $user->isTutorGrupo($grupo))
-        ? Response::allow();
+        ? Response::allow()
         : Response::deny('Usted no tiene permisos para esta acción');
     }
 
@@ -61,7 +61,7 @@ class MatriculaPolicy
         $user = Auth::user();
         $grupo = $matricula->grupoObject;
         return ( $user->isCoordinadorCentro($centro) || $user->isCreadorGrupo($grupo) || $user->isTutorGrupo($grupo))
-        ? Response::allow();
+        ? Response::allow()
         : Response::deny('Usted no tiene permisos para esta acción');
     }
 
@@ -77,7 +77,7 @@ class MatriculaPolicy
         $user = Auth::user();
         $grupo = $matricula->grupoObject;
         return ( $user->isCoordinadorCentro($centro) || $user->isCreadorGrupo($grupo) || $user->isTutorGrupo($grupo))
-        ? Response::allow();
+        ? Response::allow()
         : Response::deny('Usted no tiene permisos para esta acción');
     }
 

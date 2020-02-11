@@ -49,6 +49,10 @@
                                     </label>
                                 </div>
                             </div>
+                            <br />
+                        <p style="margin-left:265px">OR</p>
+                        
+                        </div>
                         </div>
 
                         <div class="form-group row mb-0">
@@ -56,6 +60,12 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Login') }}
                                 </button>
+                                <a href="{{url('login/google')}}" class="btn btn-primary">Login with Google</a>
+                            
+                            
+                        <div class="form-group">
+                            
+                              
 
                                 @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
