@@ -27,6 +27,7 @@ Route::middleware('auth:api')->group(function() {
     Route::apiResource('users', 'API\UserController')->parameters([
         'users' => 'user'
     ]);
+        Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
 
     Route::apiResource('tutorizados', 'API\TutorizadoController');
 
@@ -36,7 +37,7 @@ Route::middleware('auth:api')->group(function() {
     ]);
 
     Route::apiResource('anyosescolares', 'API\AnyoEscolarController')->parameters(['anyosescolares' => 'anyoescolar']);
-  
+
         Route::apiResource('niveles', 'API\NivelController')->parameters([
             'niveles' => 'nivel'
             ]);
