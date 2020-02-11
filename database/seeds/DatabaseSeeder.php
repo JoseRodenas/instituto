@@ -1,5 +1,6 @@
 <?php
 
+use App\Faltasalumnos;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -23,6 +24,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AulasTableSeeder::class);
         $this->call(PeriodoslectivosTableSeeder::class);
         $this->call(PeriodoclaseTableSeeder::class);
+        $this->call(FaltasalumnosTableSeeder::class);
         Schema::enableForeignKeyConstraints();
     }
 }

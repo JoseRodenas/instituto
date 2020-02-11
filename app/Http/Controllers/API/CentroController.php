@@ -1,8 +1,6 @@
 <?php
 
 namespace App\Http\Controllers\API;
-
-use App\User;
 use App\Centro;
 use App\Policies\CentroPolicy;
 use App\Http\Controllers\Controller;

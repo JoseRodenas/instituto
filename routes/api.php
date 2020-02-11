@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Psr\Http\Message\ServerRequestInterface;
 use Tqdev\PhpCrudApi\Api;
 use Tqdev\PhpCrudApi\Config;
@@ -14,10 +13,10 @@ use Tqdev\PhpCrudApi\Config;
 | routes are loaded by the RouteServiceProvider within a group which
 | is assigned the "api" middleware group. Enjoy building your API!
 |
-*/
+ */
 Route::put('tutorizados/verifica/{tutor_id}/{token}', 'API\TutorizadoController@verificar');
 
-Route::middleware('auth:api')->group(function() {
+Route::middleware('auth:api')->group(function () {
 
 // Rutas adicionales a las de los Resources
     Route::get('users/profile/{user_id}', 'API\UserController@profile');
@@ -25,27 +24,28 @@ Route::middleware('auth:api')->group(function() {
     Route::put('centro/verifica/{centro_id}', 'API\CentroController@verificado');
 
     Route::apiResource('users', 'API\UserController')->parameters([
-        'users' => 'user'
+        'users' => 'user',
     ]);
         Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
+    Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
-    Route::apiResource('tutorizados', 'API\TutorizadoController');
+    Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
     Route::apiResource('aulas', 'API\AulaController');
 
     Route::apiResource('periodoslectivos', 'PeriodolectivoController');
 
+    Route::apiResource('tutorizados', 'API\TutorizadoController');
 
     Route::apiResource('centros', 'API\CentroController')->parameters([
-        'centros' => 'centro'
+        'centros' => 'centro',
     ]);
 
     Route::apiResource('anyosescolares', 'API\AnyoEscolarController')->parameters(['anyosescolares' => 'anyoescolar']);
 
-
-       Route::apiResource('niveles', 'API\NivelController')->parameters([
-           'niveles' => 'nivel'
-       ]);
+    Route::apiResource('niveles', 'API\NivelController')->parameters([
+        'niveles' => 'nivel',
+    ]);
 
     Route::put('grupos/asignaTutor/{grupo_id}/{user_id}', 'API\GrupoController@asignaTutor');
 
@@ -69,18 +69,16 @@ Route::middleware('auth:api')->group(function() {
 
 Route::any('/{any}', function (ServerRequestInterface $request) {
     $databaseConnection = config('database.default');
-    $databaseBase = 'database.connections.' . $databaseConnection . '.';
-    $configAPI = new Config([
+    $databaseBase       = 'database.connections.' . $databaseConnection . '.';
+    $configAPI          = new Config([
         'username' => config($databaseBase . 'username'),
         'password' => config($databaseBase . 'password'),
         'database' => config($databaseBase . 'database'),
-        'address' => config($databaseBase . 'host'),
+        'address'  => config($databaseBase . 'host'),
         'basePath' => '/api',
-        'debug' => true,
+        'debug'    => true,
     ]);
-    $api = new Api($configAPI);
+    $api      = new Api($configAPI);
     $response = $api->handle($request);
     return $response;
 })->where('any', '.*');
-
-
