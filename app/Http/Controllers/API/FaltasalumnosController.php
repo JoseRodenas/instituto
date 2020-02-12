@@ -4,6 +4,7 @@ namespace App\Http\Controllers\API;
 
 use App\Faltasalumnos;
 use App\Http\Controllers\Controller;
+use App\Periodoclase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -80,5 +81,15 @@ class FaltasalumnosController extends Controller
                 ->where("idfaltasalumno", $alumno->idfaltasalumno)
                 ->update(["asiste" => true]);
         };
+    }
+
+    public function faltasiniciales(Request $request){
+        $user = Auth::user();
+        $materiaimpartidaid = DB::table('periodosclases')->where('id', $request->periodoclase_id)->value('materiaimpartida_id');
+        $docente = DB::table('materiasimpartidas')->where('materia', $materiaimpartidaid)->value('docente');
+        if ($user->id == $docente) {
+            DB::table('faltasalumnos')->where('periodoclase_id', $request->periodoclase_id)->update(["asiste" => false]);
+        }
+
     }
 }

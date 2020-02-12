@@ -26,7 +26,9 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', 'API\UserController')->parameters([
         'users' => 'user',
     ]);
-        Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
+    
+    Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
+
     Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
     Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
