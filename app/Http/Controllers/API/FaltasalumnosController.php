@@ -76,15 +76,11 @@ class FaltasalumnosController extends Controller
         $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $resultantes);
         $to = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $resultahora);
         $diff_in_minutes = $to->diffInMinutes($from);
-        /* if ($diff_in_minutes <=5) {
-            DB::table('faltasalumnos')
-                ->where("idfaltasalumno", $alumno->idfaltasalumno)
-                ->update(["asiste" => true]);
-         }; */
-         $alumno->asiste = true;
-         $alumno->save();
-         return $alumno;
-         /* echo var_dump($alumno); */
+         if ($diff_in_minutes <=5) {
+            $alumno->asiste = true;
+            $alumno->save();
+            return $alumno;
+         };
     }
 
     public function faltasiniciales(Request $request){
