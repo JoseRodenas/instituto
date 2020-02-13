@@ -26,11 +26,15 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', 'API\UserController')->parameters([
         'users' => 'user',
     ]);
+
+    Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
     Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
     Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
-    Route::apiResource('tutorizados', 'API\TutorizadoController');
+    Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
+
+    Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
     Route::apiResource('aulas', 'API\AulaController');
 
@@ -47,7 +51,7 @@ Route::middleware('auth:api')->group(function () {
        Route::apiResource('niveles', 'API\NivelController')->parameters([
            'niveles' => 'nivel'
        ]);
-  
+
     Route::put('grupos/asignaTutor/{grupo_id}/{user_id}', 'API\GrupoController@asignaTutor');
 
     Route::apiResource('grupos', 'API\GrupoController');
