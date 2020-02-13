@@ -68,7 +68,7 @@ class FaltasalumnosController extends Controller
 
     public function marcarasistencia(Faltasalumnos $faltasalumnos){
         $user = Auth::user();
-        $alumno = Faltasalumnos::where('alumno', $user->id)->get()->first();
+        $alumno = Faltasalumnos::where('alumno', $user->id)->latest('created_at')->first();
         $antes = new \DateTime(date($alumno->updated_at));
         $resultantes = $antes->format('Y-m-d H:i:s');
         $ahora = new \DateTime();
@@ -76,11 +76,21 @@ class FaltasalumnosController extends Controller
         $from = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $resultantes);
         $to = \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $resultahora);
         $diff_in_minutes = $to->diffInMinutes($from);
-        if ($diff_in_minutes <=5) {
-            DB::table('faltasalumnos')
-                ->where("idfaltasalumno", $alumno->idfaltasalumno)
-                ->update(["asiste" => true]);
-        };
+         if ($diff_in_minutes <=5) {
+            $alumno->asiste = true;
+            $alumno->save();
+            return $alumno;
+         };
+    }
+
+    public function faltasiniciales(Request $request){
+        $user = Auth::user();
+        $materiaimpartidaid = DB::table('periodosclases')->where('id', $request->periodoclase_id)->value('materiaimpartida_id');
+        $docente = DB::table('materiasimpartidas')->where('materia', $materiaimpartidaid)->value('docente');
+        if ($user->id == $docente) {
+            DB::table('faltasalumnos')->where('periodoclase_id', $request->periodoclase_id)->update(["asiste" => false]);
+        }
+
     }
 
     public function faltasiniciales(Request $request){
