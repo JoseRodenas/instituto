@@ -40,23 +40,12 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('periodoslectivos', 'PeriodolectivoController');
 
-<<<<<<< HEAD
-    Route::apiResource('tutorizados', 'API\TutorizadoController');
-=======
->>>>>>> 13d1838b99efcdd1588b5003fea87d6e5d53b113
 
     Route::apiResource('centros', 'API\CentroController')->parameters([
         'centros' => 'centro',
     ]);
 
     Route::apiResource('anyosescolares', 'API\AnyoEscolarController')->parameters(['anyosescolares' => 'anyoescolar']);
-<<<<<<< HEAD
-
-    Route::apiResource('niveles', 'API\NivelController')->parameters([
-        'niveles' => 'nivel',
-    ]);
-=======
->>>>>>> 13d1838b99efcdd1588b5003fea87d6e5d53b113
 
 
        Route::apiResource('niveles', 'API\NivelController')->parameters([
