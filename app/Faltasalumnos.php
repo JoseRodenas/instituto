@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Faltasalumnos extends Model
 {
 protected $table = "faltasalumnos";
+protected $primaryKey = 'idfaltasalumno';
 
 protected $fillabe = ["idfaltasalumno", "alumno", "asiste", "retraso", "justificada", "periodoclase_id"];
 
