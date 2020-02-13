@@ -18,3 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+/* Route::get('login/redirect', 'SocialAuthGoogleController@redirect');
+Route::get('/callback', 'SocialAuthGoogleController@callback'); */
+Route::get('login/{provider}', 'Auth\LoginController@redirectToProvider');
+Route::get('login/{google}/callback', 'Auth\LoginController@handleProviderCallback');

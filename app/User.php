@@ -2,14 +2,12 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     use HasApiTokens, Notifiable;
 
     /**
@@ -17,8 +15,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+    
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password','provider','provider_id'
     ];
 
     /**
@@ -42,40 +41,35 @@ class User extends Authenticatable
     /**
      * Get the centros for the user.
      */
-    public function centros()
-    {
+    public function centros() {
         return $this->hasOne('App\Centro', 'coordinador');
     }
 
     /**
      * Get the grupos for the user as tutor.
      */
-    public function tutorGrupos()
-    {
+    public function tutorGrupos() {
         return $this->hasMany('App\Grupo', 'tutor');
     }
 
     /**
      * Get the grupos for the user as creador.
      */
-    public function creadorGrupos()
-    {
+    public function creadorGrupos() {
         return $this->hasMany('App\Grupo', 'creador');
     }
 
     /**
      * Get the materiasimpartidas for the user as docente.
      */
-    public function materiasimpartidas()
-    {
+    public function materiasimpartidas() {
         return $this->hasMany('App\Materiasimpartidas', 'docente');
     }
 
     /**
      * Get the materiasmatriculadas for the user as alumno.
      */
-    public function materiasmatriculadas()
-    {
+    public function materiasmatriculadas() {
         return $this->hasMany('App\Materiasmatriculadas', 'alumno');
     }
 
@@ -145,9 +139,22 @@ class User extends Authenticatable
         return $this->isCoordinadorCentro($centro) || $rtn;
     }
 
-    public function isAlumnoCentro(Centro $centro = null)
-    {
-        return true;
+    public function isAlumnoCentro(Centro $centro = null) {
+        //Se trata de crear un método isAlumnoCentro(Centro $centro = null), que:
+
+        //En el caso de que no se le envíe ningún centro como parámetro, devolverá true si
+        //el usuario está matriculado en algún grupo.
+        if ($centro == null) {
+            $matriculado = Matricula::where("alumno", $this->id)->get();
+            return isset($matriculado) ? true : false;
+        } else {
+            //En el caso de que se le envíe un centro como parámetro,
+            //devolverá true si el usuario está matriculado en algún grupo de ese centro.
+            $gruposDelUsuario = $this->misGruposMatriculados()->get();
+            $gruposDelCentro  = $centro->misGrupos()->get();
+            return $gruposDelCentro->intersect($gruposDelUsuario)->count() > 0 ? true : false;
+        }
+
     }
 
     public function isCreadorGrupo(Grupo $grupo = null)
@@ -164,7 +171,31 @@ class User extends Authenticatable
 
     public function isTutorGrupo(Grupo $grupo = null)
     {
-        return true;
+        $booleano = true;
+        $idUser = $this->id;
+
+        if($grupo == null){
+            //hay que ver todos los grupos existentes y comprobar si algun tutor coincide
+            $encontrado = Grupo::where('tutor' , $idUser)->get();
+            if($encontrado == null) $booleano = false; //no es tutor de ningun grupo
+        } else {
+            //hay que comprobar si es del grupo pasado como valor
+            $idGrupoTutor = $grupo->tutor;
+            if($idUser !== $idGrupoTutor) $booleano = false; //no es tutor del grupo especificado
+        }
+        return $booleano;
+    }
+
+  
+    public function misGruposMatriculados() {
+        return $this->hasManyThrough(
+            'App\Grupo',
+            'App\Matricula',
+            'alumno', // Foreign key on anyosescolares table...
+            'id', // Foreign key on grupos table...
+            'id', // Local key on centros table...
+            'id' // Local key on anyosescolares table...
+        );
     }
   
     public function misProfesores(Nivel $nivel = null){

@@ -26,8 +26,11 @@ Route::middleware('auth:api')->group(function () {
     Route::apiResource('users', 'API\UserController')->parameters([
         'users' => 'user',
     ]);
-    
+
     Route::post('faltasalumnos/registrarFaltas/{periodoclase_id}', 'API\FaltasalumnosController@faltasiniciales');
+    Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
+
+    Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
     Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
@@ -37,17 +40,28 @@ Route::middleware('auth:api')->group(function () {
 
     Route::apiResource('periodoslectivos', 'PeriodolectivoController');
 
+<<<<<<< HEAD
     Route::apiResource('tutorizados', 'API\TutorizadoController');
+=======
+>>>>>>> 13d1838b99efcdd1588b5003fea87d6e5d53b113
 
     Route::apiResource('centros', 'API\CentroController')->parameters([
         'centros' => 'centro',
     ]);
 
     Route::apiResource('anyosescolares', 'API\AnyoEscolarController')->parameters(['anyosescolares' => 'anyoescolar']);
+<<<<<<< HEAD
 
     Route::apiResource('niveles', 'API\NivelController')->parameters([
         'niveles' => 'nivel',
     ]);
+=======
+>>>>>>> 13d1838b99efcdd1588b5003fea87d6e5d53b113
+
+
+       Route::apiResource('niveles', 'API\NivelController')->parameters([
+           'niveles' => 'nivel'
+       ]);
 
     Route::put('grupos/asignaTutor/{grupo_id}/{user_id}', 'API\GrupoController@asignaTutor');
 
@@ -65,7 +79,7 @@ Route::middleware('auth:api')->group(function () {
         'materiasimpartidas' => 'materiaimpartida'
     ]);
 
-    Route::apiResource('periodosclases', 'PeriodoclaseController');
+    Route::apiResource('periodosclases', 'API\PeriodoclaseController');
 
 });
 

@@ -15,3 +15,4 @@ yarn-error.log
 /public/js
 /resources/views/jquery
 /routes/jquery.php
+composer.lock
