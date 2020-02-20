@@ -5,6 +5,7 @@ use App\Centro;
 use App\Policies\CentroPolicy;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\CentroResource;
+use App\Http\Resources\PeriodoclaseResource;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Support\Facades\Auth;
@@ -103,5 +104,9 @@ class CentroController extends Controller
 
         }
 
-}
+    }
+    public function PeriodoActual(){
+        
+        return Centro::periodoActual();
+    }
 }

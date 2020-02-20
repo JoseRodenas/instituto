@@ -32,14 +32,13 @@ Route::middleware('auth:api')->group(function () {
 
     Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
-    Route::apiResource('Faltasalumnos', 'API\FaltasalumnosController');
 
-    Route::put('faltasalumnos/yoEstoy', 'API\FaltasalumnosController@marcarasistencia');
 
     Route::apiResource('aulas', 'API\AulaController');
 
     Route::apiResource('periodoslectivos', 'PeriodolectivoController');
 
+    Route::get('horarios/docenciaActual', 'API\CentroController@PeriodoActual');
 
     Route::apiResource('centros', 'API\CentroController')->parameters([
         'centros' => 'centro',

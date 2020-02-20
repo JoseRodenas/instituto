@@ -93,13 +93,5 @@ class FaltasalumnosController extends Controller
 
     }
 
-    public function faltasiniciales(Request $request){
-        $user = Auth::user();
-        $materiaimpartidaid = DB::table('periodosclases')->where('id', $request->periodoclase_id)->value('materiaimpartida_id');
-        $docente = DB::table('materiasimpartidas')->where('materia', $materiaimpartidaid)->value('docente');
-        if ($user->id == $docente) {
-            DB::table('faltasalumnos')->where('periodoclase_id', $request->periodoclase_id)->update(["asiste" => false]);
-        }
 
-    }
 }
